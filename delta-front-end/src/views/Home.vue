@@ -9,7 +9,13 @@
         </div>
         <el-row :gutter="10">
           <el-col :span="12" :offset="4">
-            <el-input placeholder="Enter the Station Code Here" v-model="searchKeyWord" class="input-with-select">
+            <el-autocomplete
+              v-model="searchKeyWord"
+              :fetch-suggestions="autoSuggestion"
+              placeholder="Enter Keyword"
+              :trigger-on-focus="false"
+              @select="handleSelect"
+            >
               <el-select v-model="searchOptionCode" slot="prepend">
                 <el-option
                   v-for="item in searchOptions"
@@ -18,7 +24,7 @@
                   :value="item.value">
                 </el-option>
               </el-select>
-            </el-input>
+            </el-autocomplete>
           </el-col>
           <el-col :span="4">
             <el-button icon="el-icon-search" type="info">
@@ -67,7 +73,7 @@ export default {
   components: {},
   data () {
     return {
-      useAdvSearch: false,
+      useAdvSearch: true,
       searchResult: [],
       searchOptions: [
         { text: 'All', value: 0 },
@@ -84,6 +90,31 @@ export default {
   methods: {
     quickPager (index) {
       // Update Table content
+    },
+    handleSelect (keyword) {
+      this.searchKeyWord = keyword.value
+    },
+    async autoSuggestion (prefix, callback) {
+      var suggestion = []
+      if (!this.useAdvSearch) {
+        callback(suggestion)
+        return
+      }
+
+      await this.$axios({
+        method: 'get',
+        url: '/keyword/lookup/' + prefix + '?limit=6',
+        headers: { 'Access-Control-Allow-Origin': '*' }
+      })
+        .then((res) => {
+          if (res.data.payload.status !== 200) return this.$message.error(res.data.payload.message)
+
+          suggestion = (res.data.data).map(value => ({ value }))
+          callback(suggestion)
+        })
+        .catch((err) => {
+          this.$handleResError(err.response)
+        })
     }
   }
 }
@@ -112,5 +143,9 @@ export default {
 
   .el-select {
     width: 85px;
+  }
+
+  .el-autocomplete {
+    width: 100%;
   }
 </style>

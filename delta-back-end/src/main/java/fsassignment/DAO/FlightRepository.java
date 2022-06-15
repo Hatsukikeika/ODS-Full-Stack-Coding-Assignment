@@ -7,19 +7,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import fsassignment.bean.Flight;
+import fsassignment.bean.convertor.StationPair;
 
 public interface FlightRepository extends JpaRepository<Flight, Long> {
 	
-	public List<Flight> findByAorBorCorD(String... strings);
+	public List<Flight> findByDestinationOrOriginOrFullDestinationOrFullOrigin(String destination, String origin, String fullDestination, String fullOrigin);
 	
-	@Query(value=
-			"SELECT destination FROM Flight flight" +
-			"union" +
-			"SELECT orgin FROM Flight flight" +
-			"union" + 
-			"SELECT fullDestination FROM Flight flight" +
-			"union" +
-			"SELECT fullOrigin FROM Flight flight"
-			, nativeQuery = true)
-	public HashSet<String> getStationInfo();
+	@Query(value="SELECT destination as code, destination_full_name as fullname FROM flights ", nativeQuery = true)
+	public HashSet<StationPair> getDestinationPair();
+	
+	
+	@Query(value="SELECT origin as code, origin_full_name as fullname FROM flights", nativeQuery = true)
+	public HashSet<StationPair> getOriginPair();
 }
