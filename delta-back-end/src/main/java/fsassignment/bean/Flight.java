@@ -15,16 +15,16 @@ public class Flight {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="create_at")
-	private Date createAt;
+	@Column(name="created_at")
+	private String createAt;
 	
 	@Column(name="updated_at")
-	private Date updateAt;
+	private String updateAt;
 	
 	@Column(name="flight_identifier")
 	private String flightUID;
 	
-	@Column(name="fit_num")
+	@Column(name="flt_num")
 	private Integer flightNum;
 	
 	@Column(name="scheduled_origin_gate")
@@ -34,16 +34,16 @@ public class Flight {
 	private String gateDestination;
 	
 	@Column(name="out_gmt")
-	private Date out;
+	private String out;
 	
 	@Column(name="in_gmt")
-	private Date in;
+	private String in;
 	
 	@Column(name="off_gmt")
-	private Date off;
+	private String off;
 	
 	@Column(name="on_gmt")
-	private Date on;
+	private String on;
 
 	@Column(name="destination")
 	private String destination;
@@ -67,19 +67,19 @@ public class Flight {
 		this.id = id;
 	}
 
-	public Date getCreateAt() {
+	public String getCreateAt() {
 		return createAt;
 	}
 
-	public void setCreateAt(Date createAt) {
+	public void setCreateAt(String createAt) {
 		this.createAt = createAt;
 	}
 
-	public Date getUpdateAt() {
+	public String getUpdateAt() {
 		return updateAt;
 	}
 
-	public void setUpdateAt(Date updateAt) {
+	public void setUpdateAt(String updateAt) {
 		this.updateAt = updateAt;
 	}
 
@@ -115,35 +115,35 @@ public class Flight {
 		this.gateDestination = gateDestination;
 	}
 
-	public Date getOut() {
+	public String getOut() {
 		return out;
 	}
 
-	public void setOut(Date out) {
+	public void setOut(String out) {
 		this.out = out;
 	}
 
-	public Date getIn() {
+	public String getIn() {
 		return in;
 	}
 
-	public void setIn(Date in) {
+	public void setIn(String in) {
 		this.in = in;
 	}
 
-	public Date getOff() {
+	public String getOff() {
 		return off;
 	}
 
-	public void setOff(Date off) {
+	public void setOff(String off) {
 		this.off = off;
 	}
 
-	public Date getOn() {
+	public String getOn() {
 		return on;
 	}
 
-	public void setOn(Date on) {
+	public void setOn(String on) {
 		this.on = on;
 	}
 
