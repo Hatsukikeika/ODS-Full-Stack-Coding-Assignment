@@ -18,9 +18,13 @@ Request URL: 'http://localhost:80/api/v1/flights/{keyword}?type={type}&page={pag
 Method: ```HTTP GET```
 
 Path Variable: ```string {keyword} required```
+
 Request Parameter: ```string {type} not required```
+
 Request Parameter: ```int {page} not required```
+
 Request Parameter: ```int {pageSize} not required```
+
 
 Response Body:
 ```json
@@ -68,7 +72,9 @@ Request URL: 'http://localhost:80/api/v1/station/lookup/{keyword}?limit={limit}'
 Method: ```HTTP GET```
 
 Path Variable: ```string {keyword} required```
+
 Request Parameter: ```int {limit} not required```
+
 
 Response Body:
 ```json
@@ -96,4 +102,5 @@ This assignment is tested manually by PostMan & manual operations.
 A showcase video can be found at 'https://www.youtube.com/watch?v=tOtu0PCiMKw'
 
 Feature 1 average response time is in 7ms;
+
 Feature 2 average response time is in 10ms;
