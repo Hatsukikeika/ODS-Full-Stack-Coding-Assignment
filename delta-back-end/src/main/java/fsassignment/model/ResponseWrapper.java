@@ -3,6 +3,11 @@ package fsassignment.model;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Yi
+ *
+ * A container that generalize the format of HTTP response body.
+ */
 public class ResponseWrapper {
 	private Object data;
 	private Map<String, Object> payload = new HashMap<>();

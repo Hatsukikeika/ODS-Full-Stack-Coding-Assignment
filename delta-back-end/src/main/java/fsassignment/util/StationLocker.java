@@ -8,6 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * @author Yi
+ *
+ * A locker for the station info. Implement based using Trie algorithm
+ */
 public class StationLocker implements Locker<String>{
 	
 	HashMap<Character, StationLocker> next = new HashMap<>();
@@ -17,6 +22,9 @@ public class StationLocker implements Locker<String>{
 	
 	public StationLocker() {}
 	
+	/**
+	 * Build Trie tree.
+	 */
 	public void addItem(String... word) {
 		if(word[0] == null) return;
 		StationLocker itr = this;
@@ -31,6 +39,9 @@ public class StationLocker implements Locker<String>{
 		if(word[1] != null) itr.fullname = word[1];
 	}
 	
+	/**
+	 * Breath first search on the given Trie node.
+	 */
 	public List<String> fuzzySearch(String prefix, int limit) {
 		HashSet<String> result = new HashSet<>(limit);
 		
@@ -60,6 +71,9 @@ public class StationLocker implements Locker<String>{
 		return temp;
 	}
 	
+	/**
+	 * locate a Trie node based on input.
+	 */
 	public StationLocker locate(String word) {
 		StationLocker itr = this;
 		for(char c : word.toCharArray()) {

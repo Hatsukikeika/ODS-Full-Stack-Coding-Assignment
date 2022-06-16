@@ -12,6 +12,10 @@ import fsassignment.bean.convertor.StationPair;
 import fsassignment.util.AutoComplete;
 import fsassignment.util.StationLocker;
 
+/**
+ * @author Yi
+ *
+ */
 @SpringBootApplication
 public class App {
 
@@ -21,6 +25,11 @@ public class App {
 	static ApplicationContext context;
 	static String catagory = "station";
 
+	/**
+	 * Program Enterance
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		//Init Spring Application
@@ -29,16 +38,19 @@ public class App {
 		
 		//Init load auto-complete helper
 		init();
-		//Ready
-		System.out.println("Program is running...");
 	}
 	
+	/**
+	 * A method that intial the auto-suggestion dictionary.
+	 */
 	private static void init() {
 		AutoComplete.register(catagory, new StationLocker());
 		
+		// Get All <station code, station name> pair
 		HashSet<StationPair> stations = flightRepository.getDestinationPair();
 		stations.addAll(flightRepository.getOriginPair());
 		
+		// Load the station info into dictionary.
 		for(StationPair station : stations) {			
 			AutoComplete.tryLoad(catagory, station.getCode(), station.getFullName());
 			AutoComplete.tryLoad(catagory, station.getFullName(), station.getCode());

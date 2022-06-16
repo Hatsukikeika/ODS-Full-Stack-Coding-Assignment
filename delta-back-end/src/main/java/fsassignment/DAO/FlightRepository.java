@@ -9,6 +9,10 @@ import org.springframework.data.jpa.repository.Query;
 import fsassignment.bean.Flight;
 import fsassignment.bean.convertor.StationPair;
 
+/**
+ * @author Yi
+ *
+ */
 public interface FlightRepository extends JpaRepository<Flight, Long> {
 	
 	public List<Flight> findByDestinationOrOriginOrFullDestinationOrFullOrigin(String destination, String origin, String fullDestination, String fullOrigin);

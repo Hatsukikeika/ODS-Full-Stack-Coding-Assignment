@@ -6,6 +6,10 @@ import org.springframework.data.domain.Page;
 
 import fsassignment.bean.Flight;
 
+/**
+ * @author Yi
+ *
+ */
 public interface FlightService {
 	
 	Page<Flight> allFlightByStation(String keyword, int page, int size);

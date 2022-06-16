@@ -8,11 +8,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Yi
+ *
+ */
 @Component
 public class PagiHelper<T> {
 
 	/**
-	 * A method that paginating the List<Item> to Page<Item>
+	 * A simple method that paginating the List<Item> to Page<Item>
 	 * 
 	 * @param itemlist the input itemlist
 	 * @param pageNum  page number
