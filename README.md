@@ -1,38 +1,99 @@
 # ODS Full Stack Coding Assignment
 
-## Assignment
+## Tech Stack
 
-Create a web application that allows a user to search for flights and display the results in a tabular view.
+#### Front End: 
+Vue2.js, Vue Router, Vue ui (CLI), Element-UI, Axios, less (CSS), HTML, Javascript
 
-## Features
+#### Back End: 
+Spring Web, Spring Data JPA, Hibernate, Java, MySQL
 
-1. Allow the user to enter a station (destination or origin) to search flights. Display the results in a table.
+## RESTful API
+Base URL: 'http://localhost:80/api/v1/'
 
-2. Provide an auto-suggest feature for station. A user should be able to see flights based on station code or location name. For example,
-for Nashville (BNA), a user should be able to select flights to/from Nashville by entering the keywords BNA or Nashville. 
+**Feature 1: search** 
 
-3. Provide two RESTful endpoints supporting the functionality listed in steps 1 and 2.
+Request URL: 'http://localhost:80/api/v1/flights/{keyword}?type={type}&page={page}&pageSize={pageSize}'
 
-## Bonus Points (Not required)
-1. Unit tests are created for your code and test the main logic you've put together, e.g. auto-suggest returns BNA when Nashville is the search term.
+Method: ```HTTP GET```
 
+Path Variable: ```string {keyword} required```
+Request Parameter: ```string {type} not required```
+Request Parameter: ```int {page} not required```
+Request Parameter: ```int {pageSize} not required```
 
-## Datasource
+Response Body:
+```json
+{
+    "data": {
+        "content": [
+            {
+                "id": 294314,
+                "createAt": "2019-09-19 20:36:44",
+                "updateAt": "2019-09-19 20:36:44",
+                "flightUID": "bb919965-b673-470e-8d6f-4970a6ae8c64",
+                "flightNum": 1114,
+                "gateOrigin": "B4",
+                "gateDestination": "F03",
+                "out": "2019-02-09 22:56:05",
+                "in": "2019-02-10 02:54:09",
+                "off": "2019-02-09 23:08:18",
+                "on": "2019-02-10 02:50:41",
+                "destination": "SLC",
+                "origin": "BNA",
+                "fullDestination": "Salt Lake City Intl",
+                "fullOrigin": "Nashville Intl"
+            }
+        ],
+        "last": false,
+        "totalElements": 19,
+        "totalPages": 19,
+        "number": 1,
+        "size": 1,
+        "sort": null,
+        "first": false,
+        "numberOfElements": 1
+    },
+    "payload": {
+        "message": "OK",
+        "status": 200
+    }
+}
+```
 
-A zipped CSV file of flights is available in /data/flights.csv. Each row in the CSV file represents a flight.
+**Feature 2: auto-suggest** 
 
-## Implementation
+Request URL: 'http://localhost:80/api/v1/station/lookup/{keyword}?limit={limit}'
 
-**Preferred tech stack:**
-* Backend: Python, node.js, SpringBoot, etc.
-* Angular or other frontend framework (ReactJS, vue.js, etc.)
-* Docker (If you'd like to host it, try hosting it on Firebase, Netlify since there's a free tier with a small db setup)
+Method: ```HTTP GET```
 
-However, you may use other tech if you are more comfortable with something else. You can use any additional technologies/frameworks/DBs/libraries you would like to.
+Path Variable: ```string {keyword} required```
+Request Parameter: ```int {limit} not required```
 
-**To submit your solution:** 
-* Clone this repo and push to a personal github repo and submit the link
-* Please update the README
-* Return your solution within 3 business days, unless other directions provided.
-* Feel free to ask questions at any time.
-* Have fun with it! Your application can be as simple or complex as possible.
+Response Body:
+```json
+{
+    "data": [
+        "BNA",
+        "Nashville Intl"
+    ],
+    "payload": {
+        "message": "OK",
+        "status": 200
+    }
+}
+```
+
+## Reproduce the project
+If you want to run this project on a localhost, you will need npm installed on your enviornment, as well as Vue CLI too.
+
+To run the front-end, open CMD and enter ```vue ui``` command, import the folder delta-front-end into the Vue CLI, and run it by ```vue ui``` interface via browser or you can manually install the dependencies via npm, and then do a ```npm run serve```.
+
+To run the back-end, first import the file ```flights.csv``` into MySQL database, configure the JDBC connection via file ```application.properties``` under ```delta-back-end\src\main\resources``` folder. You can run this project in any IDE that supports Maven project, Eclipse would be a good one here since I develop this on Eclipse.
+
+## Test
+This assignment is tested manually by PostMan & manual operations.
+A showcase video can be found at 'https://www.youtube.com/watch?v=tOtu0PCiMKw'
+
+Feature 1 average response time is in 7ms;
+Feature 2 average response time is in 10ms;
